@@ -1,5 +1,5 @@
 backend_service := backend
-dev-dockerfile := -f docker-compose.yml -f docker-compose.dev.yml
+dev-dockerfile := -f docker-compose.yml
 
 help:
 	@echo "Please use 'make <target>' - where <target> is one of the following commands."

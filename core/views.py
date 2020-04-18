@@ -25,8 +25,20 @@ class EmailsViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=["POST"])
     def send_all_pending(self, request):
-        pending = Email.objects.filter(status=Email.PENDING).values_list(
+        pending = Email.objects.filter(status=Email.PENDING)
+
+        high_priority_pending = pending.filter(priority=Email.HIGH).values_list(
             "pk", flat=True
         )
-        celery_send_all_pending.delay(list(pending))
+        celery_send_all_pending.apply_async(
+            queue="high", args=(list(high_priority_pending),)
+        )
+
+        low_priority_pending = pending.filter(priority=Email.LOW).values_list(
+            "pk", flat=True
+        )
+        celery_send_all_pending.apply_async(
+            queue="default", args=(list(low_priority_pending),)
+        )
+
         return Response(status=status.HTTP_204_NO_CONTENT)

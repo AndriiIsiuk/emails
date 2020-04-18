@@ -26,6 +26,8 @@ services:
       - media-files:/code/media
     ports:
       - 8001:8001
+    logging:
+      driver: none
 
   db:
     container_name: db-service-emails
@@ -46,17 +48,48 @@ services:
       context: .
       dockerfile: ./Dockerfile
     container_name: celery-service-emails
-    command: bash -c "celery -A emails worker -l info -c 1"
+    command: bash -c "celery -A emails worker -l info -Q default -c 1"
     env_file:
       - ./.env
     volumes:
       - ./:/code
       - media-files:/code/media
+      - celery_workers:/tmp
     depends_on:
       - db
       - redis
 
+  celery-high-priority-worker:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: celery-service-emails-high-priority
+    command: bash -c "celery -A emails worker -l info -Q high -c 1"
+    env_file:
+      - ./.env
+    volumes:
+      - ./:/code
+      - media-files:/code/media
+      - celery_workers:/tmp:ro
+      - celery_workers:/var/tmp:ro
+    depends_on:
+      - db
+      - redis
+
+  mailhog:
+    container_name: mailhog-service
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
+      - 8026:1025
+    volumes:
+      - ./mailhog:/etc/mailauth/
+    environment:
+      - MH_AUTH_FILE=/etc/mailauth/auth-file
+    logging:
+      driver: none
 
 volumes:
   db_volume:
   media-files:
+  celery_workers:
