@@ -1,0 +1,60 @@
+version: '3.7'
+
+services:
+  backend:
+    container_name: backend-service-emails
+    build:
+      context: .
+    image: emails_backend
+    environment:
+      DJANGO_SETTINGS_MODULE: emails.settings.dev
+      PYTHONPATH: emails
+      TZ: Europe/Warsaw
+    command:
+      bash -c "./wait_for_db.sh
+      && python ./manage.py collectstatic --noinput
+      && python ./manage.py migrate --noinput
+      && python ./manage.py runserver 0.0.0.0:8001"
+    tty: true
+    stdin_open: true
+    env_file:
+      - .env
+    depends_on:
+      - db
+    volumes:
+      - .:/code
+    ports:
+      - 8001:8001
+
+  db:
+    container_name: db-service-emails
+    env_file:
+      - .env
+    image: postgres:11
+    restart: always
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+
+  redis:
+    container_name: redis-service-emails
+    image: redis:5
+    restart: always
+
+#  celery:
+#    build:
+#      context: .
+#      dockerfile: ./Dockerfile
+#    container_name: celery-service-emails
+#    command: bash -c "celery -A emails worker -l info -c 1"
+#    env_file:
+#      - ./emails/.env
+#    volumes:
+#      - ./emails:/code
+#      - media-files:/code/emails/media
+#    depends_on:
+#      - db
+#      - redis
+
+volumes:
+  db_volume:
+  media-files:
