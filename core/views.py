@@ -23,7 +23,7 @@ class EmailsViewSet(viewsets.ModelViewSet):
         if mail.status == Email.SENT:
             celery_send_created_email.delay(mail.pk)
 
-    @action(detail=False, methods=["POST"])
+    @action(detail=False, methods=["POST"], url_path="send-all-pending")
     def send_all_pending(self, request):
         pending = Email.objects.filter(status=Email.PENDING)
 
