@@ -1,12 +1,13 @@
 from rest_framework import serializers
 
 from .models import Attachment, Email
+from .services.mails import send_email
 
 
 class AttachmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attachment
-        fields = ("attachment",)
+        fields = ("attachment", "id")
 
 
 class EmailSerializer(serializers.ModelSerializer):
@@ -46,7 +47,7 @@ class EmailCreateSerializer(serializers.ModelSerializer):
         email = Email.objects.create(**validated_data)
 
         attachments = []
-        for attachment in files:
+        for attachment in files.values():
             attachments.append(Attachment(attachment=attachment, email=email))
         Attachment.objects.bulk_create(attachments)
 

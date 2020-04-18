@@ -66,7 +66,7 @@ class Migration(migrations.Migration):
                 ),
                 ("attachment", models.FileField(upload_to="")),
                 (
-                    "email",
+                    "mail",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="attachments",

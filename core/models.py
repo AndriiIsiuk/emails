@@ -21,6 +21,10 @@ class Email(models.Model):
     status = models.CharField(max_length=16, choices=STATUSES, default=PENDING)
     priority = models.CharField(max_length=8, choices=PRIORITY, default=LOW)
 
+    def __str__(self):
+        # TODO - remove!!!!!---------
+        return f"Email with attachments {self.attachments}"
+
 
 class Attachment(models.Model):
     attachment = models.FileField()
