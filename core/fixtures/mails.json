@@ -46,5 +46,29 @@
         "status": "SENT",
         "priority": "LOW"
     }
+},
+{
+    "model": "core.email",
+    "pk": 5,
+    "fields": {
+        "sender": "priority@sender.com",
+        "recipients": "[\"rec1@mail.com\"]",
+        "title": "This is pending HIGH priority mail",
+        "message": "This is test message for email with 1 recipient",
+        "status": "PENDING",
+        "priority": "HIGH"
+    }
+},
+{
+    "model": "core.email",
+    "pk": 6,
+    "fields": {
+        "sender": "priority@sender.com",
+        "recipients": "[\"rec1@mail.com\", \"rec2@mail.com\", \"test3@example.com\"]",
+        "title": "This is pending HIGH priority mail - 2",
+        "message": "This is test message for email with 3 recipients",
+        "status": "PENDING",
+        "priority": "HIGH"
+    }
 }
 ]

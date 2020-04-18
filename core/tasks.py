@@ -15,6 +15,7 @@ def celery_send_created_email(email_pk: int) -> None:
 @app.task
 def celery_send_all_pending(pending_emails: List[int]) -> None:
     """Sending all emails with PENDING status"""
+    print(11111111111111111111111111111111111111111111111111111111111, pending_emails)
     for pk in pending_emails:
         email = Email.objects.get(pk=pk)
         send_email(email)
