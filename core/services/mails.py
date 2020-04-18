@@ -1,21 +1,19 @@
 from django.core.mail import EmailMessage
 
 
-def send_email(mail):
+def send_email(mail_instance):
     email_data = dict(
-        subject=mail.title,
-        body=mail.message,
-        from_email=mail.sender,
-        to=mail.recipients,
+        subject=mail_instance.title,
+        body=mail_instance.message,
+        from_email=mail_instance.sender,
+        to=mail_instance.recipients,
     )
 
     # TODO make Celery task to send emails
     # celery_send_email_task(email_data)
     mail = EmailMessage(**email_data)
-    print(11111111, mail.attachments)
 
-    for file in mail.attachments:
+    for file in mail_instance.attachments.all():
         mail.attach_file(file.attachment.path)
 
-    print(mail)
     mail.send()

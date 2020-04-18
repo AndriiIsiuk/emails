@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
 from .models import Attachment, Email
-from .services.mails import send_email
 
 
 class AttachmentSerializer(serializers.ModelSerializer):
