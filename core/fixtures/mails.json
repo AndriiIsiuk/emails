@@ -1,0 +1,50 @@
+[
+{
+    "model": "core.email",
+    "pk": 1,
+    "fields": {
+        "sender": "me@sender.com",
+        "recipients": "[\"rec1@mail.com\"]",
+        "title": "This is pending email 1",
+        "message": "This is test message for email with 1 recipient",
+        "status": "PENDING",
+        "priority": "LOW"
+    }
+},
+{
+    "model": "core.email",
+    "pk": 2,
+    "fields": {
+        "sender": "me@sender.com",
+        "recipients": "[\"rec1@mail.com\", \"rec2@mail.com\", \"test3@example.com\"]",
+        "title": "This is pending email 2",
+        "message": "This is test message for email with 3 recipients",
+        "status": "PENDING",
+        "priority": "LOW"
+    }
+},
+{
+    "model": "core.email",
+    "pk": 3,
+    "fields": {
+        "sender": "me@sender.com",
+        "recipients": "[\"rec1@mail.com\"]",
+        "title": "This is sent email 1",
+        "message": "This is test message for email with 1 recipients",
+        "status": "SENT",
+        "priority": "LOW"
+    }
+},
+{
+    "model": "core.email",
+    "pk": 4,
+    "fields": {
+        "sender": "another@sender.com",
+        "recipients": "[\"rec1@mail.com\", \"rec2@mail.com\", \"test3@example.com\"]",
+        "title": "This is sent email 2",
+        "message": "This is test message for email with 3 recepients",
+        "status": "SENT",
+        "priority": "LOW"
+    }
+}
+]
