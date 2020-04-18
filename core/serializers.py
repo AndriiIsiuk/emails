@@ -1,3 +1,5 @@
+from typing import List
+
 from rest_framework import serializers
 
 from .models import Attachment, Email
@@ -38,6 +40,9 @@ class EmailCreateSerializer(serializers.ModelSerializer):
             "status",
             "priority",
         )
+
+    def validate_recipients(self, recipients: List[str]) -> List[str]:
+        return list(set(recipients))
 
     def create(self, validated_data):
         files = validated_data["files"]

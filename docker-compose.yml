@@ -26,8 +26,6 @@ services:
       - media-files:/code/media
     ports:
       - 8001:8001
-    logging:
-      driver: none
 
   db:
     container_name: db-service-emails
