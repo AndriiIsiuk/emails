@@ -99,8 +99,22 @@ STATIC_ROOT = env.str("STATIC_ROOT", os.path.join(BASE_DIR, "..", "static/"))
 MEDIA_URL = "/api/media/"
 MEDIA_ROOT = os.environ.get("MEDIA_ROOT", os.path.join(BASE_DIR, "..", "media/"))
 
+# Emails config
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_USER = env("EMAIL_USER")
 EMAIL_PASSWORD = env("EMAIL_PASSWORD")
 EMAIL_PORT = env("EMAIL_PORT")
+
+# REDIS
+REDIS_HOST = env("REDIS_HOST")
+REDIS_PORT = 6379
+REDIS_DB = 0
+
+# Celery application definition
+CELERY_BROKER_URL = f"redis://{REDIS_HOST}:{env.int('REDIS_PORT', REDIS_PORT)}"
+CELERY_RESULT_BACKEND = f"redis://{REDIS_HOST}:{env.int('REDIS_PORT', REDIS_PORT)}"
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TASK_SERIALIZER = "json"
+CELERY_TASK_DEFAULT_QUEUE = "emails"

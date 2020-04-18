@@ -22,8 +22,7 @@ class Email(models.Model):
     priority = models.CharField(max_length=8, choices=PRIORITY, default=LOW)
 
     def __str__(self):
-        # TODO - remove!!!!!---------
-        return f"Email with attachments {self.attachments}"
+        return f"Email {self.pk} from {self.sender}"
 
 
 class Attachment(models.Model):

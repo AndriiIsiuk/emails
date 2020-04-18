@@ -42,20 +42,20 @@ services:
     image: redis:5
     restart: always
 
-#  celery:
-#    build:
-#      context: .
-#      dockerfile: ./Dockerfile
-#    container_name: celery-service-emails
-#    command: bash -c "celery -A emails worker -l info -c 1"
-#    env_file:
-#      - ./emails/.env
-#    volumes:
-#      - ./emails:/code
-#      - media-files:/code/emails/media
-#    depends_on:
-#      - db
-#      - redis
+  celery:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: celery-service-emails
+    command: bash -c "celery -A emails worker -l info -c 1"
+    env_file:
+      - ./.env
+    volumes:
+      - ./:/code
+      - media-files:/code/media
+    depends_on:
+      - db
+      - redis
 
   mailhog:
     container_name: mailhog-service
