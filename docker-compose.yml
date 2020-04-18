@@ -13,7 +13,6 @@ services:
     command:
       bash -c "./wait_for_db.sh
       && python ./manage.py collectstatic --noinput
-      && python ./manage.py makemigrations --noinput
       && python ./manage.py migrate --noinput
       && python ./manage.py runserver 0.0.0.0:8001"
     tty: true
@@ -57,18 +56,6 @@ services:
       - db
       - redis
 
-  mailhog:
-    container_name: mailhog-service
-    image: mailhog/mailhog
-    ports:
-      - 8025:8025
-      - 8026:1025
-    volumes:
-      - ./mailhog:/etc/mailauth/
-    environment:
-      - MH_AUTH_FILE=/etc/mailauth/auth-file
-    logging:
-      driver: none
 
 volumes:
   db_volume:

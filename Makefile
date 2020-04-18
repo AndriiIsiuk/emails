@@ -1,9 +1,10 @@
 backend_service := backend
-dev-dockerfile := -f docker-compose.yml
+dev-dockerfile := -f docker-compose.yml -f docker-compose.dev.yml
 
 help:
 	@echo "Please use 'make <target>' - where <target> is one of the following commands."
 	@echo "build-dev                to build and run a development version"
+	@echo "dev                      to run a development version"
 	@echo "migrations               to make migrations and run them after changing Django models"
 	@echo "load-fixtures            to load available fixtures for Emails"
 	@echo "dump-fixtures            to create fixtures for Emails from current database"
@@ -18,6 +19,10 @@ help:
 .PHONY: build-dev
 build-dev:
 	docker-compose $(dev-dockerfile) build
+
+.PHONY: dev
+dev:
+	docker-compose $(dev-dockerfile) up
 
 ### The following require the backend container to be up ###
 

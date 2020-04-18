@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  mailhog:
+    container_name: mailhog-service
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
+      - 8026:1025
+    volumes:
+      - ./mailhog:/etc/mailauth/
+    environment:
+      - MH_AUTH_FILE=/etc/mailauth/auth-file
+    logging:
+      driver: none
