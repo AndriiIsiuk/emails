@@ -98,3 +98,9 @@ STATIC_ROOT = env.str("STATIC_ROOT", os.path.join(BASE_DIR, "..", "static/"))
 
 MEDIA_URL = "/api/media/"
 MEDIA_ROOT = os.environ.get("MEDIA_ROOT", os.path.join(BASE_DIR, "..", "media/"))
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_USER = env("EMAIL_USER")
+EMAIL_PASSWORD = env("EMAIL_PASSWORD")
+EMAIL_PORT = env("EMAIL_PORT")

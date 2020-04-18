@@ -24,6 +24,7 @@ services:
       - db
     volumes:
       - .:/code
+      - media-files:/code/media
     ports:
       - 8001:8001
 
@@ -55,6 +56,19 @@ services:
 #    depends_on:
 #      - db
 #      - redis
+
+  mailhog:
+    container_name: mailhog-service
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
+      - 8026:1025
+    volumes:
+      - ./mailhog:/etc/mailauth/
+    environment:
+      - MH_AUTH_FILE=/etc/mailauth/auth-file
+    logging:
+      driver: none
 
 volumes:
   db_volume:

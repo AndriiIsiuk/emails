@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name="email",
+            model_name="mail",
             name="recipients",
             field=django.contrib.postgres.fields.ArrayField(
                 base_field=models.EmailField(max_length=64), size=None
