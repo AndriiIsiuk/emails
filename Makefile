@@ -5,6 +5,8 @@ help:
 	@echo "Please use 'make <target>' - where <target> is one of the following commands."
 	@echo "build-dev                to build and run a development version"
 	@echo "migrations               to make migrations and run them after changing Django models"
+	@echo "load-fixtures            to load available fixtures for Emails"
+	@echo "dump-fixtures            to create fixtures for Emails from current database"
 	@echo "test                     to run tests on the backend"
 	@echo "coverage                 to show tests coverage of the project"
 	@echo "flush-db                 to flush project database"
@@ -26,6 +28,15 @@ migrations:
 .PHONY: backend-bash
 backend-bash:
 	docker-compose exec $(backend_service) bash -l
+
+.PHONY: dump-fixtures
+dump-fixtures:
+	docker-compose exec $(backend_service) bash -c "./manage.py dumpdata core > core/fixtures/mails.json --indent 4"
+
+.PHONY: load-fixtures
+load-fixtures:
+	docker-compose exec $(backend_service) bash -c "./manage.py loaddata core/fixtures/mails.json"
+
 
 ### The following require the backend container to be up in development mode (production version will have no needed libraries) ###
 
