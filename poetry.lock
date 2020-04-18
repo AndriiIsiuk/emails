@@ -94,6 +94,14 @@ argon2 = ["argon2-cffi (>=16.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+category = "main"
+description = "Deletes old files."
+name = "django-cleanup"
+optional = false
+python-versions = "*"
+version = "4.0.0"
+
+[[package]]
 category = "dev"
 description = "Middleware that Prints the number of DB queries to the runserver console."
 name = "django-querycount"
@@ -460,7 +468,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "80751b0b7d5d1d2aa972a8d8192d2f462a372b20b3c9e2c05a095063be270608"
+content-hash = "998fa4cbcd1587cadb26545c2cca02853aa1dd3009808e596def1827cf702287"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -527,6 +535,10 @@ distlib = [
 django = [
     {file = "Django-3.0.5-py3-none-any.whl", hash = "sha256:642d8eceab321ca743ae71e0f985ff8fdca59f07aab3a9fb362c617d23e33a76"},
     {file = "Django-3.0.5.tar.gz", hash = "sha256:d4666c2edefa38c5ede0ec1655424c56dc47ceb04b6d8d62a7eac09db89545c1"},
+]
+django-cleanup = [
+    {file = "django-cleanup-4.0.0.tar.gz", hash = "sha256:412c3f9417ddaaaa561b60237b109550b16e556db92d4616278fc7e1ad9ab0a4"},
+    {file = "django_cleanup-4.0.0-py2.py3-none-any.whl", hash = "sha256:b2bdb590eccc1a8e0688d5c6224080d3bb4a77e5bad1688fbe452d8c3454d755"},
 ]
 django-querycount = [
     {file = "django-querycount-0.7.0.tar.gz", hash = "sha256:8f5123d78716ff0704f2373e746a7200b8d8417798ce4a99bf2de87e3768f9ce"},
