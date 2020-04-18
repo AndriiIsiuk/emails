@@ -8,7 +8,7 @@ from .models import Attachment, Email
 class AttachmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attachment
-        fields = ("attachment", "id")
+        fields = ("attachment",)
 
 
 class EmailSerializer(serializers.ModelSerializer):

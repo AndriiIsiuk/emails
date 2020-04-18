@@ -51,7 +51,7 @@ test:
 
 .PHONY: coverage
 coverage:
-	docker-compose exec $(backend_service) bash -c "pytest --cov-config setup.cfg --cov=emails emails/core/tests/"
+	docker-compose exec $(backend_service) bash -c "pytest --cov-config setup.cfg --cov=core"
 
 .PHONY: flush-db
 flush-db:
