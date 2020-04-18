@@ -3,7 +3,7 @@ from rest_framework import viewsets
 
 from core.models import Email
 from core.serializers import EmailSerializer, EmailCreateSerializer
-from core.services.mails import send_email
+from core.tasks import celery_send_created_email
 
 
 class EmailsViewSet(viewsets.ModelViewSet):
@@ -18,7 +18,8 @@ class EmailsViewSet(viewsets.ModelViewSet):
         with transaction.atomic():
             mail = serializer.save(files=self.request.FILES)
 
-        send_email(mail)
+        if mail.status == Email.SENT:
+            celery_send_created_email.delay(mail.pk)
 
     # TODO - send all emails
     # TODO - select_related("attachments")
