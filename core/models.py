@@ -1,6 +1,6 @@
-from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.db.models import EmailField
+from django.contrib.postgres.fields import ArrayField
 
 
 class Email(models.Model):
@@ -15,7 +15,7 @@ class Email(models.Model):
     PRIORITY = ((LOW, "Low"), (HIGH, "High"))
 
     sender = models.EmailField(max_length=64)
-    recipients = ArrayField(EmailField(max_length=64, blank=True))
+    recipients = ArrayField(EmailField(max_length=64))
     title = models.CharField(max_length=256)
     message = models.TextField(blank=False)
     status = models.CharField(max_length=16, choices=STATUSES, default=PENDING)
