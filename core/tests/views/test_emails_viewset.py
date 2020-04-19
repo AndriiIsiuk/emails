@@ -17,7 +17,7 @@ class TestItemsApiView(APITestCase):
         cls.emails_send_pending_url = reverse("core:email-send-all-pending")
 
     def setUp(self):
-        self.email = EmailFactory()
+        self.email = EmailFactory(status=Email.PENDING)
         self.email2_data = {
             "sender": "test1@send.it",
             "recipients": ["one@one.com", "two@two.com"],
@@ -89,3 +89,9 @@ class TestItemsApiView(APITestCase):
 
         last = Email.objects.all().last()
         self.assertEqual(sorted(last.recipients), ["one@one.com", "two@two.com"])
+
+    def test_email_status(self):
+        email = EmailFactory(status=Email.SENT)
+        email_status_url = reverse("core:email-show-email-status", args=(email.id,))
+        response = self.client.get(email_status_url)
+        self.assertDictEqual(response.json(), {"id": email.id, "status": email.status})
