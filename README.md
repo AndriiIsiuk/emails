@@ -27,14 +27,15 @@ This project is fully Dockerized. You can have this project development version 
 make build-dev
 make dev
 ```
+You can find running application under **http://0.0.0.0:8001/api/core/emails/**
 
 ### Available API
 **GET**
 ```
 /api/core/emails/
 ```
-Response status code: `200`
 Shows a list of created mails in database.<br>
+Response status code: `200`<br>
 
 **POST**
 ```
@@ -84,7 +85,7 @@ make load-fixtures
 
 
 ### Mailhog
-Application supports [Mailhog](https://github.com/mailhog/MailHog) for testing.<br>
+Application supports [Mailhog](https://github.com/mailhog/MailHog) for emails sending testing.<br>
 You can find it under:<br>
 ```
 http://0.0.0.0:8025/
