@@ -56,3 +56,9 @@ class EmailCreateSerializer(serializers.ModelSerializer):
         Attachment.objects.bulk_create(attachments)
 
         return email
+
+
+class EmailStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Email
+        fields = ("id", "status")
