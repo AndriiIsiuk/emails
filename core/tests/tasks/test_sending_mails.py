@@ -7,7 +7,7 @@ from core.tests.factories.email import EmailFactory
 
 class TestCelerySendTasks(TestCase):
     def setUp(self):
-        self.email = EmailFactory()
+        self.email = EmailFactory(status=Email.PENDING)
 
     def test_send_emails_pending(self):
         for _ in range(2):

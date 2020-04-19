@@ -1,6 +1,10 @@
 from django.test import TestCase
 
-from core.serializers import EmailSerializer, EmailCreateSerializer
+from core.serializers import (
+    EmailSerializer,
+    EmailCreateSerializer,
+    EmailStatusSerializer,
+)
 
 
 class EmailSerializerTests(TestCase):
@@ -29,4 +33,9 @@ class EmailSerializerTests(TestCase):
             "status",
             "priority",
         }
+        self.assertCountEqual(cart_ser.fields, fields)
+
+    def test_contains_expected_fields_email_status_serializer(self):
+        cart_ser = EmailStatusSerializer()
+        fields = {"id", "status"}
         self.assertCountEqual(cart_ser.fields, fields)
