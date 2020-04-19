@@ -4,7 +4,11 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from core.models import Email
-from core.serializers import EmailSerializer, EmailCreateSerializer
+from core.serializers import (
+    EmailSerializer,
+    EmailCreateSerializer,
+    EmailStatusSerializer,
+)
 from core.tasks import celery_send_created_email, celery_send_all_pending
 
 
@@ -14,6 +18,8 @@ class EmailsViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == "create":
             return EmailCreateSerializer
+        elif self.action == "show_email_status":
+            return EmailStatusSerializer
         return EmailSerializer
 
     def perform_create(self, serializer):
@@ -42,3 +48,9 @@ class EmailsViewSet(viewsets.ModelViewSet):
         )
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @action(detail=True, methods=["GET"], url_path="status")
+    def show_email_status(self, request, pk):
+        email = self.get_object()
+        serializer = self.get_serializer(email)
+        return Response(serializer.data)

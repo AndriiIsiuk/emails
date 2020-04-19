@@ -62,6 +62,13 @@ Response status code: `201`
 Shows details about selected mail by its **pk**.<br>
 Response status code: `200`
 
+**GET**
+```
+/api/core/emails/<pk>/status
+```
+Shows status of the selected mail by its **pk**.<br>
+Response status code: `200`
+
 **POST**
 ```
 /api/core/emails/send-all-pending/
@@ -131,7 +138,7 @@ make flush-db
 make load-fixtures
 ```
 ### Attachments
-Every key, which will be marked as *File* in **POST** request to `http://0.0.0.0:8001/api/core/emails/` will be counted as the mail attachment.
+Every key which will be marked as *File* in **POST** request to `http://0.0.0.0:8001/api/core/emails/` will be counted as the mail attachment.
 
 ## Built With
 
