@@ -6,10 +6,6 @@ from core.models import Email
 from core.tests.factories.email import EmailFactory
 
 
-def _fake_celery_send_all_pending(ids):
-    return True
-
-
 class TestItemsApiView(APITestCase):
     @classmethod
     def setUpTestData(cls):
